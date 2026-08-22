@@ -1,0 +1,22 @@
+# --- Core ---
+Django==5.1.4
+djangorestframework==3.15.2
+
+# --- Geo / DRF ---
+djangorestframework-gis==1.1
+django-filter==24.3
+
+# --- Autenticación JWT ---
+djangorestframework-simplejwt==5.3.1
+
+# --- Documentación OpenAPI / Swagger ---
+drf-spectacular==0.28.0
+
+# --- Configuración por entorno (secretos fuera del repo) ---
+django-environ==0.11.2
+
+# --- Driver PostgreSQL ---
+psycopg2-binary==2.9.10
+
+# --- Servidor WSGI para despliegue ---
+gunicorn==23.0.0
