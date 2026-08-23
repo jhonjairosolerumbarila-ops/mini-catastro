@@ -18,5 +18,18 @@ services:
       timeout: 5s
       retries: 10
 
+  web:
+    build: .
+    container_name: catastro_web
+    env_file: .env
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    command: python manage.py runserver 0.0.0.0:8000
+
 volumes:
   pgdata:
