@@ -4,6 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from .models import Predio, Propietario, ZonaRiesgo
+from .filters import PredioFilter
 from .serializers import (
     PredioDetailSerializer,
     PredioListSerializer,
@@ -28,6 +29,7 @@ class PredioViewSet(viewsets.ModelViewSet):
     """CRUD de predios y consultas espaciales."""
 
     queryset = Predio.objects.select_related("propietario").all()
+    filterset_class = PredioFilter
     search_fields = ["numero_predial", "nombre_direccion"]
     ordering_fields = ["numero_predial", "creado_en"]
     lookup_field = "numero_predial"
