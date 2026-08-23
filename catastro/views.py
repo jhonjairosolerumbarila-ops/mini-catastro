@@ -2,6 +2,10 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django.conf import settings
+from django.contrib.gis.db.models.functions import Transform
+from django.contrib.gis.geos import Point
+from django.contrib.gis.measure import D
 
 from .models import Predio, Propietario, ZonaRiesgo
 from .filters import PredioFilter
@@ -45,6 +49,28 @@ class PredioViewSet(viewsets.ModelViewSet):
         predio = self.get_object()
         zonas = ZonaRiesgo.objects.filter(poligono__intersects=predio.poligono)
         return Response(RiesgoResumenSerializer(zonas, many=True).data)
+
+    @action(detail=False, methods=["get"], url_path="cercanos")
+    def cercanos(self, request):
+        """Predios dentro de un radio (metros) de un punto. Usa CTM12 (9377)."""
+        try:
+            lon = float(request.query_params["lon"])
+            lat = float(request.query_params["lat"])
+            radio = float(request.query_params["radio"])
+        except (KeyError, ValueError):
+            return Response(
+                {"detail": "Parametros requeridos: lon, lat, radio (numericos)."},
+                status=400,
+            )
+        punto = Point(lon, lat, srid=settings.SRID_ALMACENAMIENTO)
+        punto_m = punto.transform(settings.SRID_METRICO, clone=True)
+        predios = (
+            self.get_queryset()
+            .annotate(geom_ctm=Transform("poligono", settings.SRID_METRICO))
+            .filter(geom_ctm__dwithin=(punto_m, D(m=radio)))
+        )
+        serializer = PredioListSerializer(predios, many=True)
+        return Response(serializer.data)
 
 
 class ZonaRiesgoViewSet(viewsets.ModelViewSet):
