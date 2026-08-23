@@ -1,0 +1,154 @@
+[
+  {
+    "model": "catastro.propietario",
+    "pk": 1,
+    "fields": {
+      "documento_identidad": "1015420001",
+      "nombre_completo": "Maria Fernanda Rios",
+      "correo_electronico": "mfrios@example.com",
+      "telefono": "3001112233",
+      "creado_en": "2026-08-23T22:34:59.605545+00:00",
+      "actualizado_en": "2026-08-23T22:34:59.605545+00:00"
+    }
+  },
+  {
+    "model": "catastro.propietario",
+    "pk": 2,
+    "fields": {
+      "documento_identidad": "79855102",
+      "nombre_completo": "Carlos Andres Gomez",
+      "correo_electronico": "cgomez@example.com",
+      "telefono": "3014445566",
+      "creado_en": "2026-08-23T22:34:59.605545+00:00",
+      "actualizado_en": "2026-08-23T22:34:59.605545+00:00"
+    }
+  },
+  {
+    "model": "catastro.propietario",
+    "pk": 3,
+    "fields": {
+      "documento_identidad": "52988771",
+      "nombre_completo": "Laura Valentina Pena",
+      "correo_electronico": "lpena@example.com",
+      "telefono": "3027778899",
+      "creado_en": "2026-08-23T22:34:59.605545+00:00",
+      "actualizado_en": "2026-08-23T22:34:59.605545+00:00"
+    }
+  },
+  {
+    "model": "catastro.predio",
+    "pk": 1,
+    "fields": {
+      "numero_predial": "257540000000000000000000000001",
+      "nombre_direccion": "Carrera 10 # 20-30",
+      "propietario": 1,
+      "condicion_predio": "PH",
+      "poligono": "SRID=4326;MULTIPOLYGON (((-74.081 4.65, -74.079 4.65, -74.079 4.652, -74.081 4.652, -74.081 4.65)))",
+      "creado_en": "2026-08-23T22:34:59.605545+00:00",
+      "actualizado_en": "2026-08-23T22:34:59.605545+00:00"
+    }
+  },
+  {
+    "model": "catastro.predio",
+    "pk": 2,
+    "fields": {
+      "numero_predial": "257540000000000000000000000002",
+      "nombre_direccion": "Carrera 9 # 20-15",
+      "propietario": 1,
+      "condicion_predio": "NPH",
+      "poligono": "SRID=4326;MULTIPOLYGON (((-74.079 4.65, -74.077 4.65, -74.077 4.652, -74.079 4.652, -74.079 4.65)))",
+      "creado_en": "2026-08-23T22:34:59.605545+00:00",
+      "actualizado_en": "2026-08-23T22:34:59.605545+00:00"
+    }
+  },
+  {
+    "model": "catastro.predio",
+    "pk": 3,
+    "fields": {
+      "numero_predial": "257540000000000000000000000003",
+      "nombre_direccion": "Calle 19 # 11-05",
+      "propietario": 2,
+      "condicion_predio": "CONDOMINIO",
+      "poligono": "SRID=4326;MULTIPOLYGON (((-74.083 4.648, -74.081 4.648, -74.081 4.65, -74.083 4.65, -74.083 4.648)))",
+      "creado_en": "2026-08-23T22:34:59.605545+00:00",
+      "actualizado_en": "2026-08-23T22:34:59.605545+00:00"
+    }
+  },
+  {
+    "model": "catastro.predio",
+    "pk": 4,
+    "fields": {
+      "numero_predial": "257540000000000000000000000004",
+      "nombre_direccion": "Vereda El Alto s/n",
+      "propietario": 3,
+      "condicion_predio": "INFORMAL",
+      "poligono": "SRID=4326;MULTIPOLYGON (((-74.07 4.66, -74.068 4.66, -74.068 4.662, -74.07 4.662, -74.07 4.66)))",
+      "creado_en": "2026-08-23T22:34:59.605545+00:00",
+      "actualizado_en": "2026-08-23T22:34:59.605545+00:00"
+    }
+  },
+  {
+    "model": "catastro.predio",
+    "pk": 5,
+    "fields": {
+      "numero_predial": "257540000000000000000000000005",
+      "nombre_direccion": "Calle 22 # 8-40",
+      "propietario": 1,
+      "condicion_predio": "NPH",
+      "poligono": "SRID=4326;MULTIPOLYGON (((-74.077 4.652, -74.075 4.652, -74.075 4.654, -74.077 4.654, -74.077 4.652)))",
+      "creado_en": "2026-08-23T22:34:59.605545+00:00",
+      "actualizado_en": "2026-08-23T22:34:59.605545+00:00"
+    }
+  },
+  {
+    "model": "catastro.zonariesgo",
+    "pk": 1,
+    "fields": {
+      "nombre": "Inundacion Rio Fucha",
+      "nivel_riesgo": "ALTO",
+      "poligono": "SRID=4326;MULTIPOLYGON (((-74.0815 4.6495, -74.0765 4.6495, -74.0765 4.6525, -74.0815 4.6525, -74.0815 4.6495)))",
+      "creado_en": "2026-08-23T22:34:59.605545+00:00",
+      "actualizado_en": "2026-08-23T22:34:59.605545+00:00"
+    }
+  },
+  {
+    "model": "catastro.zonariesgo",
+    "pk": 2,
+    "fields": {
+      "nombre": "Falla Geologica Oriente",
+      "nivel_riesgo": "MEDIO",
+      "poligono": "SRID=4326;MULTIPOLYGON (((-74.0835 4.6475, -74.0805 4.6475, -74.0805 4.6505, -74.0835 4.6505, -74.0835 4.6475)))",
+      "creado_en": "2026-08-23T22:34:59.605545+00:00",
+      "actualizado_en": "2026-08-23T22:34:59.605545+00:00"
+    }
+  },
+  {
+    "model": "catastro.zonariesgo",
+    "pk": 3,
+    "fields": {
+      "nombre": "Remocion en Masa Ladera",
+      "nivel_riesgo": "BAJO",
+      "poligono": "SRID=4326;MULTIPOLYGON (((-74.0775 4.6515, -74.0745 4.6515, -74.0745 4.6545, -74.0775 4.6545, -74.0775 4.6515)))",
+      "creado_en": "2026-08-23T22:34:59.605545+00:00",
+      "actualizado_en": "2026-08-23T22:34:59.605545+00:00"
+    }
+  },
+  {
+    "model": "catastro.copropiedad",
+    "pk": 1,
+    "fields": {
+      "predio": 1,
+      "propietario": 1,
+      "porcentaje_participacion": "60.00"
+    }
+  },
+  {
+    "model": "catastro.copropiedad",
+    "pk": 2,
+    "fields": {
+      "predio": 1,
+      "propietario": 2,
+      "porcentaje_participacion": "40.00"
+    }
+  }
+]
