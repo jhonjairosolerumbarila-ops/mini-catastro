@@ -6,6 +6,8 @@ from django.conf import settings
 from django.contrib.gis.db.models.functions import Transform
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
+from django.contrib.gis.db.models.aggregates import Union
+from django.db.models import Count
 
 from .models import Predio, Propietario, ZonaRiesgo
 from .filters import PredioFilter
@@ -77,5 +79,31 @@ class ZonaRiesgoViewSet(viewsets.ModelViewSet):
     """CRUD de zonas de riesgo."""
 
     queryset = ZonaRiesgo.objects.all()
+
+    @action(detail=False, methods=["get"], url_path="estadisticas")
+    def estadisticas(self, request):
+        """Cantidad de predios afectados por cada nivel de riesgo."""
+        resultado = []
+        for nivel, etiqueta in ZonaRiesgo.Nivel.choices:
+            combinada = ZonaRiesgo.objects.filter(nivel_riesgo=nivel).aggregate(
+                geom=Union("poligono")
+            )["geom"]
+            if combinada is None:
+                afectados = 0
+            else:
+                afectados = Predio.objects.filter(
+                    poligono__intersects=combinada
+                ).count()
+            resultado.append({
+                "nivel_riesgo": nivel,
+                "nivel_riesgo_display": etiqueta,
+                "zonas": ZonaRiesgo.objects.filter(nivel_riesgo=nivel).count(),
+                "predios_afectados": afectados,
+            })
+        return Response({
+            "resumen_por_nivel": resultado,
+            "total_zonas": ZonaRiesgo.objects.count(),
+            "total_predios": Predio.objects.count(),
+        })
     serializer_class = ZonaRiesgoSerializer
     search_fields = ["nombre"]
