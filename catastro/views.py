@@ -74,6 +74,22 @@ class PredioViewSet(viewsets.ModelViewSet):
         serializer = PredioListSerializer(predios, many=True)
         return Response(serializer.data)
 
+    @action(detail=False, methods=["get"], url_path="por-ubicacion")
+    def por_ubicacion(self, request):
+        """Predio(s) que contienen una coordenada (punto en poligono)."""
+        try:
+            lon = float(request.query_params["lon"])
+            lat = float(request.query_params["lat"])
+        except (KeyError, ValueError):
+            return Response(
+                {"detail": "Parametros requeridos: lon, lat (numericos)."},
+                status=400,
+            )
+        punto = Point(lon, lat, srid=settings.SRID_ALMACENAMIENTO)
+        predios = self.get_queryset().filter(poligono__contains=punto)
+        serializer = PredioListSerializer(predios, many=True)
+        return Response(serializer.data)
+
 
 class ZonaRiesgoViewSet(viewsets.ModelViewSet):
     """CRUD de zonas de riesgo."""
