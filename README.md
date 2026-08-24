@@ -34,24 +34,18 @@ cp .env.example .env
 # 3. Levantar base de datos PostGIS + backend Django
 docker compose up --build
 ```
-
 Cuando el log muestre `Starting development server at http://0.0.0.0:8000/`,
 la API esta lista.
 
-### Inicializar datos (primera vez)
+### Inicializar datos
 
-En otra terminal, con los contenedores arriba:
+El `entrypoint.sh` corre automaticamente al levantar el contenedor:
+aplica migraciones (extension PostGIS + SRID 9377), crea el
+superusuario (variables DJANGO_SUPERUSER_* del .env) y carga el
+fixture de ejemplo.
 
-```bash
-# Migraciones (crea tablas, habilita PostGIS, registra el SRID 9377)
-docker compose exec web python manage.py migrate
-
-# Superusuario para autenticarse
-docker compose exec web python manage.py createsuperuser
-
-# Datos de ejemplo
-docker compose exec web python manage.py loaddata fixtures/initial_data.json
-```
+Con `docker compose up` el backend queda listo, sin pasos manuales.
+Superusuario por defecto: `admin` / `DJANGO_SUPERUSER_PASSWORD`.
 
 ## Autenticación (JWT)
 
