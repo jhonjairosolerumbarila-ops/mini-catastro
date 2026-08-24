@@ -28,4 +28,5 @@ RUN pip install --no-cache-dir --upgrade pip \
 # Copiar el resto del código
 COPY . .
 
+ENTRYPOINT ["/app/entrypoint.sh"]
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
