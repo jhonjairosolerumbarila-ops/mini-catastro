@@ -149,6 +149,25 @@ Siguientes pasos para gran escala (documentados conscientemente):
 - **Cache** (Redis) para respuestas costosas y poco cambiantes (estadistica).
 
 ## Estructura del proyecto
+
+```
+mini-catastro/
+  docker-compose.yml    # db (PostGIS) + web (Django)
+  Dockerfile            # imagen web con GDAL/GEOS/PROJ
+  requirements.txt
+  .env.example          # plantilla (el .env real no se versiona)
+  manage.py
+  config/               # proyecto Django (settings, urls, wsgi)
+  catastro/             # app de negocio
+    models.py           # Propietario, Predio, ZonaRiesgo, Copropiedad
+    serializers.py      # salida GeoJSON
+    views.py            # ViewSets + acciones espaciales
+    filters.py          # filtros (condicion, nivel de riesgo)
+    urls.py             # router DRF
+    migrations/         # 0000 PostGIS+SRID 9377, 0001 modelos
+  fixtures/initial_data.json    # datos de ejemplo
+  scripts/build_fixture.py      # generador del fixture
+```
 ## Seguridad
 
 - Autenticacion **JWT** (`IsAuthenticated` por defecto en toda la API).
